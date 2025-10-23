@@ -46,7 +46,16 @@
                             <td>{{ $facultad->acronym_name }}</td>
                             <td>{{ $facultad->phone_fac }}</td>
                             <td>{{ $facultad->email_fac }}</td>
-                            <td>{{ $facultad->logo_fac }}</td>
+                            <td>
+                                @if($facultad->logo_fac)
+                                    <img src="{{ asset('storage/logos/' . $facultad->logo_fac) }}" 
+                                        alt="Logo {{ $facultad->faculty_name }}" 
+                                        style="max-width: 80px; max-height: 60px; object-fit: cover;"
+                                        class="img-thumbnail">
+                                @else
+                                    <span class="text-muted">Sin logo</span>
+                                @endif
+                            </td>
                             <td>{{ $facultad->year_fac }}</td>
                             <td>
                                 <a href="{{ route('facultades.edit', $facultad->faculty_id) }}" class="btn btn-sm btn-warning">

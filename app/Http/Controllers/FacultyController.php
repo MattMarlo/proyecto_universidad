@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Faculty;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class FacultyController extends Controller
 {
@@ -43,12 +44,13 @@ class FacultyController extends Controller
             $faculty->email_fac = $request->email_fac;
             $faculty->year_fac = $request->year_fac;
 
-            // Subir archivo si existe
+            // Subir archivo si existe - **CAMBIADO**
             if ($request->hasFile('logo_fac') && $request->file('logo_fac')->isValid()) {
                 $file = $request->file('logo_fac');
                 $filename = time() . '_' . $file->getClientOriginalName();
-                $file->storeAs('public/logos', $filename);
-                $faculty->logo_fac = 'logos/' . $filename; // ruta relativa
+                // **CAMBIÉ ESTA LÍNEA:**
+                $file->move(storage_path('app/public/logos'), $filename);
+                $faculty->logo_fac = $filename;
             }
 
             // Guardar en la base de datos
@@ -59,8 +61,6 @@ class FacultyController extends Controller
             return to_route('facultades')->with('error', 'No se pudo guardar la Faculty: ' . $e->getMessage());
         }
     }
-
-
 
     /**
      * Display the specified resource.
@@ -86,20 +86,34 @@ class FacultyController extends Controller
     {
         try{
             $facultad = Faculty::find($id);
-            $facultad->faculty_name=$request->faculty_name;
-            $facultad->location=$request->location;
-            $facultad->dean_name=$request->dean_name;
-            $facultad->acronym_name=$request->acronym_name;
-            $facultad->phone_fac=$request->phone_fac;
-            $facultad->email_fac=$request->email_fac;
-            $facultad->logo_fac=$request->logo_fac;
-            $facultad->year_fac=$request->year_fac;
-            $facultad->save();
-            return to_route('facultades')->with('success','great Faculty update');
-        }catch(Exception $e){
-            return to_route('facultades')->with('error','dont update faculty '.$e->getMessage());
-        }
+            $facultad->faculty_name = $request->faculty_name;
+            $facultad->location = $request->location;
+            $facultad->dean_name = $request->dean_name;
+            $facultad->acronym_name = $request->acronym_name;
+            $facultad->phone_fac = $request->phone_fac;
+            $facultad->email_fac = $request->email_fac;
+            $facultad->year_fac = $request->year_fac;
 
+            // Manejar la imagen en update - **CAMBIADO**
+            if ($request->hasFile('logo_fac') && $request->file('logo_fac')->isValid()) {
+                // Eliminar imagen anterior si existe
+                if ($facultad->logo_fac && file_exists(storage_path('app/public/logos/' . $facultad->logo_fac))) {
+                    unlink(storage_path('app/public/logos/' . $facultad->logo_fac));
+                }
+
+                // Subir nueva imagen
+                $file = $request->file('logo_fac');
+                $filename = time() . '_' . $file->getClientOriginalName();
+                // **CAMBIÉ ESTA LÍNEA:**
+                $file->move(storage_path('app/public/logos'), $filename);
+                $facultad->logo_fac = $filename;
+            }
+
+            $facultad->save();
+            return to_route('facultades')->with('success','Faculty actualizada correctamente');
+        }catch(Exception $e){
+            return to_route('facultades')->with('error','Error al actualizar faculty: '.$e->getMessage());
+        }
     }
 
     /**
@@ -108,12 +122,17 @@ class FacultyController extends Controller
     public function destroy(string $id)
     {
         try{
-            $facultad=Faculty::find($id);
+            $facultad = Faculty::find($id);
+            
+            // Eliminar imagen si existe - **CAMBIADO**
+            if ($facultad->logo_fac && file_exists(storage_path('app/public/logos/' . $facultad->logo_fac))) {
+                unlink(storage_path('app/public/logos/' . $facultad->logo_fac));
+            }
+            
             $facultad->delete();
-            return to_route('facultades')->with('success','great faculty detroys satifacts');
+            return to_route('facultades')->with('success','Faculty eliminada correctamente');
         } catch(Exception $e){
-            return to_route('facultades')->with('error','dont delete'.$e->getMessage());
-
+            return to_route('facultades')->with('error','Error al eliminar: '.$e->getMessage());
         }
     }
 }
