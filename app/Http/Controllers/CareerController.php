@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 //importando el modelo Career
 use App\Models\Career;
+use App\Models\Faculty;
 
 class CareerController extends Controller
 {
@@ -24,7 +25,9 @@ class CareerController extends Controller
      */
     public function create()
     {
-        //
+        $titulo = 'Nueva Carrera';
+        $facultades = Faculty::all(); 
+        return view('modules.carreras.create', compact('titulo', 'facultades'));
     }
 
     /**
@@ -32,7 +35,17 @@ class CareerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $career = new Career();
+        $career->career_name = $request->career_name;
+        $career->duration_years = $request->duration_years;
+        $career->modality = $request->modality;
+        $career->faculty_id = $request->faculty_id;
+        $career->career_number = $request->career_number;
+
+        $career->save();
+
+        return redirect()->route('carreras.index');
+                
     }
 
     /**
@@ -48,7 +61,11 @@ class CareerController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $career = Career::findOrFail($id);
+        $facultades = Faculty::all(); // Para llenar el select de facultades
+        $titulo = 'Editar Carrera';
+
+        return view('modules.carreras.edit', compact('career', 'facultades', 'titulo'));
     }
 
     /**
@@ -56,7 +73,18 @@ class CareerController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $career = Career::findOrFail($id);
+
+        $career->career_name = $request->career_name;
+        $career->duration_years = $request->duration_years;
+        $career->modality = $request->modality;
+        $career->faculty_id = $request->faculty_id;
+        $career->career_number = $request->career_number;
+
+        $career->save();
+
+        return redirect()->route('carreras.index');
+
     }
 
     /**
@@ -64,6 +92,9 @@ class CareerController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $career = Career::findOrFail($id);
+        $career->delete();
+
+        return redirect()->route('carreras.index');
     }
 }

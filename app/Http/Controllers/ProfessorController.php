@@ -44,6 +44,8 @@ class ProfessorController extends Controller
         $profesor->career_id = $request->career_id;
 
         $profesor->save();
+        
+        return redirect()->route('profesores.index');
     }
 
     /**
@@ -80,6 +82,8 @@ class ProfessorController extends Controller
         $profesor->career_id = $request->career_id;
 
         $profesor->save();
+        return redirect()->route('profesores.index');
+
     }
 
     /**
@@ -89,5 +93,7 @@ class ProfessorController extends Controller
     {
         $profesor = Professor::findOrFail($id);
         $profesor->delete();
+        return redirect()->route('profesores.index');
+
     }
 }
