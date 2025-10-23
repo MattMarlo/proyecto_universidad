@@ -9,10 +9,8 @@ class Professor extends Model
 {
     use HasFactory;
 
-    // Le dice a Laravel que la tabla se llama 'Professor' (no 'professors')
-    protected $table = 'Professor';
+    protected $table = 'professor';
 
-    // Le dice a Laravel que la clave primaria es 'professor_id' (no 'id')
     protected $primaryKey = 'professor_id';
 
     // Deshabilita created_at y updated_at

@@ -21,7 +21,7 @@ class Faculty extends Model
         'logo_fac',
         'year_fac'
     ];
-    public function carrers(){
+    public function careers(){
         return $this->hasMany(Career::class,'faculty_id','faculty_id');
     }
 

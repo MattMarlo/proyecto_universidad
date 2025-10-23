@@ -7,6 +7,9 @@
 
     {{-- Bootstrap 5 CDN --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-rXYl0lT1gY9h0l/8cO6Y9rYtJg1v8vQaNNq7Q/3c6R0t9Q0sHqX7Ndx0CZBxM0r2tn5A6u1u3PbbG5yX3aXRPQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 
     {{-- Fuente moderna --}}
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
@@ -61,7 +64,7 @@
     <!-- ===== HEADER ===== -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}">MiAplicación</a>
+            <a class="navbar-brand" href="{{ url('/') }}">SCHOOL MANAGEMENT 2025</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -69,9 +72,9 @@
             
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="{{ url('/') }}">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url('/about') }}">Acerca</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url('/contact') }}">Contacto</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url('/') }}">MAIN</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url('/about') }}">PROFESSORS</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url('/contact') }}">CAREERS</a></li>
                 </ul>
             </div>
         </div>
@@ -85,7 +88,7 @@
     <!-- ===== FOOTER ===== -->
     <footer class="text-center">
         <div class="container">
-            <p>&copy; {{ date('Y') }} <strong>MiAplicación</strong> — Todos los derechos reservados.</p>
+            <p>&copy; {{ date('Y') }} <strong>UTC</strong> — ALL RIGHTS RESERVED</p>
         </div>
     </footer>
 

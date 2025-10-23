@@ -3,11 +3,11 @@
 @section('titulo', $titulo)
 
 @section('content')
-<h1 class="mb-4">Facultades</h1>
+<h1 class="mb-4">Faculties</h1>
 
 <div class="mb-3">
     <a href="{{route('facultades.create')}}" class="btn btn-primary">
-        Nueva Facultad
+        New faculty
         <i class="fas fa-plus-circle"></i>
     </a>
 </div>
@@ -50,13 +50,14 @@
                             <td>{{ $facultad->year_fac }}</td>
                             <td>
                                 <a href="{{ route('facultades.edit', $facultad->faculty_id) }}" class="btn btn-sm btn-warning">
-                                    <i class="fa-solid fa-pen-to-square"></i> Editar
+                                    <i class="fas fa-edit"></i> Editar
                                 </a>
-                                <form action="{{route('facultades.destroy',$facultad->faculty_id)}}" method="POST" class="form-eliminar" style="display:inline-block;">
+
+                                <form action="{{ route('facultades.destroy', $facultad->faculty_id) }}" method="POST" class="form-eliminar" style="display:inline-block;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-danger">
-                                        <i class="fas fa-trash-alt"></i> Eliminar
+                                        <i class="fas fa-trash"></i> Eliminar
                                     </button>
                                 </form>
                             </td>
