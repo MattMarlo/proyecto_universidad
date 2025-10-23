@@ -12,9 +12,9 @@ class ProfessorController extends Controller
      */
     public function index()
     {
-        $titulo='Profesores';
-        $items =Professor::all();
-        return view('modules.profesores.index',compact('titulo','items'));
+        $titulo = 'Profesores';
+        $profesores = Professor::all(); // obtenemos los profesores correctamente
+        return view('modules.profesores.index', compact('titulo', 'profesores'));
     }
 
     /**

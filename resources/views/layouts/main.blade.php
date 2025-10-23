@@ -73,8 +73,8 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link" href="{{ url('/') }}">MAIN</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url('/about') }}">PROFESSORS</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url('/contact') }}">CAREERS</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('profesores.index') }}">PROFESSORS</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('carreras.index') }}">CAREERS</a></li>
                 </ul>
             </div>
         </div>

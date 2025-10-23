@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+//importando el modelo Career
+use App\Models\Career;
 
 class CareerController extends Controller
 {
@@ -11,7 +13,10 @@ class CareerController extends Controller
      */
     public function index()
     {
-        //
+        $titulo = 'Careers';
+        $careers = Career::all(); 
+        return view('modules.carreras.index', compact('titulo', 'careers'));
+        
     }
 
     /**

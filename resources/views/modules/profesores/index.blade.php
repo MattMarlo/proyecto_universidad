@@ -1,14 +1,14 @@
-@extends('layouts.admin')
+@extends('layouts.main')
 
 @section('content')
-@section('titulo',$titulo)
+@section('titulo', $titulo)
+
 <h1 class="mb-4">Profesores</h1>
 
 <div class="mb-3">
-    <a href="{{route('puntos.create')}}" class="btn btn-primary">Nuevo Profesor 
+    <a href="{{ route('profesores.create') }}" class="btn btn-primary">Nuevo Profesor 
         <i class="fas fa-plus-circle"></i>
     </a>
-   
 </div>
 
 <div class="card">
@@ -16,52 +16,46 @@
         <h5>Listado de Profesores</h5>
     </div>
     <div class="card-body">
-        @if($items->isEmpty())
-            <p class="text-muted">No hay Profesores registrados.</p>
+        @if($profesores->isEmpty())
+            <p class="text-muted">No hay profesores registrados.</p>
         @else
-            <div class="table-responsive" >
-                <table class="table table-striped table-bordered align-middle" id="tbl_puntos">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered align-middle" id="tbl_profesores">
                     <thead class="thead-dark">
                         <tr>
                             <th>ID</th>
-                            <th>Primer Nombre</th>
-                            <th>Segundo Nombre</th>
-                            <th>Titulo Academico</th>
-                            <th>email</th>
-                            <th>telefono</th>
-                            <th>Longitud</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Título Académico</th>
+                            <th>Email Institucional</th>
+                            <th>Teléfono</th>
+                            <th>Fecha Contrato</th>
+                            <th>Carrera</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($puntos as $punto)
+                        @foreach($profesores as $profesor)
                         <tr>
-                            <td>{{ $punto->id }}</td>
-                            <td>{{ $punto->nombre }}</td>
-                            <td>{{ ucfirst($punto->categoria) }}</td>
-                            <td>{{ Str::limit($punto->descripcion, 50) }}</td>
+                            <td>{{ $profesor->professor_id }}</td>
+                            <td>{{ $profesor->first_name }}</td>
+                            <td>{{ $profesor->last_name }}</td>
+                            <td>{{ $profesor->academic_title }}</td>
+                            <td>{{ $profesor->institutional_email }}</td>
+                            <td>{{ $profesor->phone_number }}</td>
+                            <td>{{ $profesor->hire_date }}</td>
+                            <td>{{ $profesor->career->career_name ?? 'Sin carrera' }}</td>
                             <td>
-                                <img src="{{ asset('storage/' . $punto->imagenes) }}" alt="Imagen" width="100">
-                            </td>
-
-
-                            <td>{{ $punto->latitud }}</td>
-                            <td>{{ $punto->longitud }}</td>
-                            <td>
-                                <a href="{{route('puntos.edit',$punto->id)}}" class="btn btn-sm btn-warning">
+                                <a href="{{ route('profesores.edit', $profesor->professor_id) }}" class="btn btn-sm btn-warning">
                                     <i class="fa-solid fa-pen-to-square"></i> Editar
                                 </a>
-                                <form action="{{ route('puntos.destroy', $punto->id) }}" method="POST" class="form-eliminar" style="display:inline-block;">
+                                <form action="{{ route('profesores.destroy', $profesor->professor_id) }}" method="POST" class="form-eliminar" style="display:inline-block;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-danger">
-                                        <i class="fas fa-trash-alt"></i> <!-- Ícono clásico -->
-                                            Eliminar
+                                        <i class="fas fa-trash-alt"></i> Eliminar
                                     </button>
                                 </form>
-
-
-                                
                             </td>
                         </tr>
                         @endforeach
@@ -71,31 +65,18 @@
         @endif
     </div>
 </div>
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        new DataTable('#tbl_puntos', {
+        new DataTable('#tbl_profesores', {
             language: {
-                "decimal": "",
-                "emptyTable": "No hay datos disponibles en la tabla",
-                "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
-                "infoEmpty": "Mostrando 0 a 0 de 0 registros",
-                "infoFiltered": "(filtrado de _MAX_ registros totales)",
-                "infoPostFix": "",
-                "thousands": ",",
-                "lengthMenu": "Mostrar _MENU_ registros por página",
-                "loadingRecords": "Cargando...",
-                "processing": "Procesando...",
-                "search": "Buscar:",
-                "zeroRecords": "No se encontraron registros coincidentes",
-                "paginate": {
-                    "first": "Primero",
-                    "last": "Último",
-                    "next": "Siguiente",
-                    "previous": "Anterior"
-                },
-                "aria": {
-                    "sortAscending": ": activar para ordenar columna ascendente",
-                    "sortDescending": ": activar para ordenar columna descendente"
+                emptyTable: "No hay datos disponibles en la tabla",
+                info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                lengthMenu: "Mostrar _MENU_ registros",
+                search: "Buscar:",
+                paginate: {
+                    next: "Siguiente",
+                    previous: "Anterior"
                 }
             }
         });
