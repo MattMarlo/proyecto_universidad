@@ -40,7 +40,7 @@ class CareerController extends Controller
         $career->duration_years = $request->duration_years;
         $career->modality = $request->modality;
         $career->faculty_id = $request->faculty_id;
-        $career->career_number = $request->career_number;
+        $career->carrer_number = $request->career_number;
 
         $career->save();
 
@@ -79,7 +79,7 @@ class CareerController extends Controller
         $career->duration_years = $request->duration_years;
         $career->modality = $request->modality;
         $career->faculty_id = $request->faculty_id;
-        $career->career_number = $request->career_number;
+        $career->carrer_number = $request->career_number;
 
         $career->save();
 

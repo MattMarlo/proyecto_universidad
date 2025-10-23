@@ -49,11 +49,11 @@
                                         @endif
                                     </td>
                                     <td class="text-center">
-                                        <a href="{{ route('career.edit', $career->career_id) }}" class="btn btn-sm btn-warning">
+                                        <a href="{{ route('carreras.edit', $career->career_id) }}" class="btn btn-sm btn-warning">
                                             <i class="fa-solid fa-pen-to-square"></i> Editar
                                         </a>
 
-                                        <form action="{{ route('career.destroy', $career->career_id) }}" method="POST"
+                                        <form action="{{ route('carreras.destroy', $career->career_id) }}" method="POST"
                                             style="display:inline-block;">
                                             @csrf
                                             @method('DELETE')
