@@ -55,4 +55,67 @@
         </form>
     </div>
 </div>
+
+@push('scripts')
+<script>
+$(document).ready(function() {
+    // Validación del formulario
+    $('#careerForm').validate({
+        rules: {
+            career_name: {
+                required: true,
+                minlength: 3
+            },
+            duration_years: {
+                required: true,
+                number: true,
+                min: 1
+            },
+            modality: {
+                required: true
+            },
+            faculty_id: {
+                required: true
+            },
+            career_number: {
+                required: true,
+                digits: true, // Solo enteros positivos
+                min: 1
+            }
+        },
+        messages: {
+            career_name: {
+                required: "Please enter the career name",
+                minlength: "Career name must be at least 3 characters"
+            },
+            duration_years: {
+                required: "Please enter the duration in years",
+                number: "Please enter a valid number",
+                min: "Duration must be at least 1 year"
+            },
+            modality: {
+                required: "Please select a modality"
+            },
+            faculty_id: {
+                required: "Please select a faculty"
+            },
+            career_number: {
+                required: "Please enter the career number",
+                digits: "Career number must be an integer",
+                min: "Career number must be at least 1"
+            }
+        },
+        errorElement: 'div',
+        errorClass: 'text-danger',
+        highlight: function(element) {
+            $(element).addClass('is-invalid');
+        },
+        unhighlight: function(element) {
+            $(element).removeClass('is-invalid');
+        }
+    });
+});
+</script>
+@endpush
+
 @endsection

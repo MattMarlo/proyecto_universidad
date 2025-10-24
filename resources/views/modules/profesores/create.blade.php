@@ -12,7 +12,7 @@
 
     <div class="card card-custom">
         <div class="card-body">
-            <form action="{{ route('profesores.store') }}" method="POST">
+            <form id="professorForm" action="{{ route('profesores.store') }}" method="POST">
                 @csrf
 
                 <div class="mb-3">
@@ -62,4 +62,80 @@
         </div>
     </div>
 </div>
+
+@push('scripts')
+<script>
+$(document).ready(function() {
+    $('#professorForm').validate({
+        rules: {
+            first_name: {
+                required: true,
+                minlength: 2
+            },
+            last_name: {
+                required: true,
+                minlength: 2
+            },
+            academic_title: {
+                required: true,
+                minlength: 2
+            },
+            institutional_email: {
+                required: true,
+                email: true
+            },
+            phone_number: {
+                required: true,
+                digits: true
+            },
+            hire_date: {
+                required: true,
+                date: true
+            },
+            career_id: {
+                required: true
+            }
+        },
+        messages: {
+            first_name: {
+                required: "Please enter the first name",
+                minlength: "First name must be at least 2 characters"
+            },
+            last_name: {
+                required: "Please enter the last name",
+                minlength: "Last name must be at least 2 characters"
+            },
+            academic_title: {
+                required: "Please enter the academic title",
+                minlength: "Academic title must be at least 2 characters"
+            },
+            institutional_email: {
+                required: "Please enter the institutional email",
+                email: "Please enter a valid email address"
+            },
+            phone_number: {
+                required: "Please enter the phone number",
+                digits: "Phone number must contain only numbers"
+            },
+            hire_date: {
+                required: "Please select the hire date",
+                date: "Please enter a valid date"
+            },
+            career_id: {
+                required: "Please select a career"
+            }
+        },
+        errorElement: 'div',
+        errorClass: 'text-danger',
+        highlight: function(element) {
+            $(element).addClass('is-invalid');
+        },
+        unhighlight: function(element) {
+            $(element).removeClass('is-invalid');
+        }
+    });
+});
+</script>
+@endpush
+
 @endsection

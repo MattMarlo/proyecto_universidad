@@ -7,7 +7,7 @@
             <h3 class="mb-0"><i class="fas fa-university"></i> Register New Faculty</h3>
         </div>
         <div class="card-body">
-            <form action="{{ route('facultades.store') }}" enctype="multipart/form-data" method="POST" class="needs-validation" novalidate>
+            <form id="facultyForm" action="{{ route('facultades.store') }}" enctype="multipart/form-data" method="POST">
                 @csrf
 
                 <div class="row">
@@ -71,5 +71,68 @@
         </div>
     </div>
 </div>
+
+@push('scripts')
+<script>
+$(document).ready(function() {
+    $('#facultyForm').validate({
+        rules: {
+            faculty_name: {
+                required: true,
+                minlength: 3
+            },
+            location: {
+                required: true,
+                minlength: 2
+            },
+            dean_name: {
+                required: true,
+                minlength: 2
+            },
+            acronym_name: {
+                required: true,
+                minlength: 2
+            },
+            phone_fac: {
+                required: true,
+                digits: true
+            },
+            email_fac: {
+                required: true,
+                email: true
+            },
+            logo_fac: {
+                required: true,
+                extension: "jpg|jpeg|png|gif"
+            },
+            year_fac: {
+                required: true,
+                digits: true,
+                min: 1900,
+                max: {{ date('Y') }}
+            }
+        },
+        messages: {
+            faculty_name: "Please enter the faculty name (at least 3 characters)",
+            location: "Please enter the location",
+            dean_name: "Please enter the dean's name",
+            acronym_name: "Please enter the acronym",
+            phone_fac: "Please enter a valid phone number",
+            email_fac: "Please enter a valid email",
+            logo_fac: "Please select a valid image file (jpg, jpeg, png, gif)",
+            year_fac: "Please enter a valid year between 1900 and {{ date('Y') }}"
+        },
+        errorElement: 'div',
+        errorClass: 'text-danger',
+        highlight: function(element) {
+            $(element).addClass('is-invalid');
+        },
+        unhighlight: function(element) {
+            $(element).removeClass('is-invalid');
+        }
+    });
+});
+</script>
+@endpush
 
 @endsection

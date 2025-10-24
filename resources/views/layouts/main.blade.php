@@ -11,11 +11,10 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"  referrerpolicy="no-referrer" />
     
-    <!-- jQuery primero -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
     <!-- jQuery Validation -->
-    <script src="https://cdn.jsdelivr.net/jquery.validation/1.19.5/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js "></script>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -110,5 +109,13 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     @stack('scripts')
+    <style>
+    .error {
+      color: red;
+      font-weight: bold;
+    }
+    .form-control.error {
+      border: 1px solid red;
+    }
 </body>
 </html>
