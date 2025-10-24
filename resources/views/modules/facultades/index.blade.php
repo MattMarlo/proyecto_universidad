@@ -7,22 +7,23 @@
 
 <div class="mb-3">
     <a href="{{route('facultades.create')}}" class="btn btn-primary">
-        New faculty
+        New Faculty
         <i class="fas fa-plus-circle"></i>
     </a>
 </div>
 
 <div class="card">
     <div class="card-header">
-        <h5>Listado de Facultades</h5>
+        
+        <h5>Faculty List</h5>
     </div>
     <div class="card-body">
         @if($facultades->isEmpty())
-            <p class="text-muted">No hay Facultades registradas.</p>
+            <p class="text-muted">No faculties registered.</p>
         @else
             <div class="table-responsive">
                 <table class="table table-striped table-bordered align-middle" id="tbl_puntos">
-                    <thead class="thead-dark">
+                    <thead class="table-dark">
                         <tr>
                             <th>ID</th>
                             <th>Faculty Name</th>
@@ -32,8 +33,8 @@
                             <th>Phone</th>
                             <th>Email</th>
                             <th>Logo</th>
-                            <th>Year Foundation</th>
-                            <th>Acciones</th>
+                            <th>Year of Foundation</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -53,20 +54,20 @@
                                         style="max-width: 80px; max-height: 60px; object-fit: cover;"
                                         class="img-thumbnail">
                                 @else
-                                    <span class="text-muted">Sin logo</span>
+                                    <span class="text-muted">No logo</span>
                                 @endif
                             </td>
                             <td>{{ $facultad->year_fac }}</td>
                             <td>
                                 <a href="{{ route('facultades.edit', $facultad->faculty_id) }}" class="btn btn-sm btn-warning">
-                                    <i class="fas fa-edit"></i> Editar
+                                    <i class="fa-solid fa-edit"></i> Edit
                                 </a>
 
                                 <form action="{{ route('facultades.destroy', $facultad->faculty_id) }}" method="POST" class="form-eliminar" style="display:inline-block;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-danger">
-                                        <i class="fas fa-trash"></i> Eliminar
+                                        <i class="fa-solid fa-trash"></i> Delete
                                     </button>
                                 </form>
                             </td>
@@ -84,25 +85,25 @@
         new DataTable('#tbl_puntos', {
             language: {
                 "decimal": "",
-                "emptyTable": "No hay datos disponibles en la tabla",
-                "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
-                "infoEmpty": "Mostrando 0 a 0 de 0 registros",
-                "infoFiltered": "(filtrado de _MAX_ registros totales)",
+                "emptyTable": "No data available in the table",
+                "info": "Showing _START_ to _END_ of _TOTAL_ entries",
+                "infoEmpty": "Showing 0 to 0 of 0 entries",
+                "infoFiltered": "(filtered from _MAX_ total entries)",
                 "thousands": ",",
-                "lengthMenu": "Mostrar _MENU_ registros por página",
-                "loadingRecords": "Cargando...",
-                "processing": "Procesando...",
-                "search": "Buscar:",
-                "zeroRecords": "No se encontraron registros coincidentes",
+                "lengthMenu": "Show _MENU_ entries per page",
+                "loadingRecords": "Loading...",
+                "processing": "Processing...",
+                "search": "Search:",
+                "zeroRecords": "No matching records found",
                 "paginate": {
-                    "first": "Primero",
-                    "last": "Último",
-                    "next": "Siguiente",
-                    "previous": "Anterior"
+                    "first": "First",
+                    "last": "Last",
+                    "next": "Next",
+                    "previous": "Previous"
                 },
                 "aria": {
-                    "sortAscending": ": activar para ordenar columna ascendente",
-                    "sortDescending": ": activar para ordenar columna descendente"
+                    "sortAscending": ": activate to sort column ascending",
+                    "sortDescending": ": activate to sort column descending"
                 }
             }
         });

@@ -3,7 +3,7 @@
 @section('content')
 <main id="main" class="main">
   <div class="pagetitle">
-    <h1>Editar Facultad</h1>
+
   </div><!-- End Page Title -->
 
   <section class="section">
@@ -11,7 +11,7 @@
       <div class="col-lg-12">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">Editar Facultad</h5>
+            <h5 class="card-title">Edit faculty</h5>
             <form action="{{ route('facultades.update', $facultades->faculty_id) }}" method="POST" enctype="multipart/form-data">
               @csrf
               @method('PUT')
@@ -45,8 +45,8 @@
               <label for="year_fac">Year Foundation</label>
               <input type="number" class="form-control" name="year_fac" id="year_fac" min="1900" max="{{ date('Y') }}" value="{{ $facultades->year_fac }}">
 
-              <button class="btn btn-primary mt-3">Guardar</button>
-              <a href="{{ route('facultades') }}" class="btn btn-info mt-3">Cancelar</a>
+              <button class="btn btn-primary mt-3">SAVE</button>
+              <a href="{{ route('facultades') }}" class="btn btn-info mt-3">CANCEL</a>
             </form>
           </div>
         </div>

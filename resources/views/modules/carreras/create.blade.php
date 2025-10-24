@@ -3,40 +3,38 @@
 @section('title', $titulo)
 
 @section('content')
-<h1 class="mb-4">{{ $titulo }}</h1>
-
 <div class="card">
     <div class="card-header">
         <h5>NEW CAREER</h5>
     </div>
     <div class="card-body">
-        <form action="{{ route('carreras.store') }}" method="POST">
+        <form id="careerForm" action="{{ route('carreras.store') }}" method="POST">
             @csrf
 
             <div class="mb-3">
                 <label for="career_name" class="form-label">NAME</label>
-                <input type="text" name="career_name" id="career_name" class="form-control" placeholder="Ingrese nombre de la carrera">
+                <input type="text" name="career_name" id="career_name" class="form-control" placeholder="Enter career name" required>
             </div>
 
             <div class="mb-3">
                 <label for="duration_years" class="form-label">DURATION (YEARS)</label>
-                <input type="number" name="duration_years" id="duration_years" class="form-control" placeholder="Ingrese duración en años">
+                <input type="number" name="duration_years" id="duration_years" class="form-control" placeholder="Enter duration in years" required>
             </div>
 
             <div class="mb-3">
-                <label for="modality" class="form-label">Modalidad</label>
-                <select name="modality" id="modality" class="form-select">
-                    <option value="">Seleccione modalidad</option>
-                    <option value="Presencial">Presencial</option>
+                <label for="modality" class="form-label">MODALITY</label>
+                <select name="modality" id="modality" class="form-select" required>
+                    <option value="">Select modality</option>
+                    <option value="Presencial">In-person</option>
                     <option value="Virtual">Virtual</option>
-                    <option value="Mixta">Mixta</option>
+                    <option value="Mixta">Mixed</option>
                 </select>
             </div>
 
             <div class="mb-3">
-                <label for="faculty_id" class="form-label">Facultad</label>
-                <select name="faculty_id" id="faculty_id" class="form-select">
-                    <option value="">Seleccione facultad</option>
+                <label for="faculty_id" class="form-label">FACULTY</label>
+                <select name="faculty_id" id="faculty_id" class="form-select" required>
+                    <option value="">Select faculty</option>
                     @foreach($facultades as $facultad)
                         <option value="{{ $facultad->faculty_id }}">{{ $facultad->faculty_name }}</option>
                     @endforeach
@@ -44,8 +42,8 @@
             </div>
 
             <div class="mb-3">
-                <label for="career_number" class="form-label">Número de Carrera</label>
-                <input type="text" name="career_number" id="career_number" class="form-control" placeholder="Ingrese número de carrera">
+                <label for="career_number" class="form-label">CAREER NUMBER</label>
+                <input type="text" name="career_number" id="career_number" class="form-control" placeholder="Enter career number" required>
             </div>
 
             <button type="submit" class="btn btn-success">
